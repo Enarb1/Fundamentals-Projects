@@ -17,7 +17,8 @@ def add_student(name, age, grade, subjects):
     else:
         students[name] = {'age': age, 'grade': grade, 'subjects': subjects}
         print(f"Student {name} added successfully.")
-    # Code to add a new student record
+    # Checking , if the student exists . If  yes, we go back , \
+    # if not - we add the new student data , to the dictionary  which stores all the students
 
 
 def update_student(name):
