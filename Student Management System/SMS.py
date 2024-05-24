@@ -3,12 +3,8 @@ students = {}
 
 
 def add_student(name, age, grade, subjects):
-    name = input("Enter students name")
-    age = int(input("Enter students age"))
-    grade = float(input("Enter students grade"))
-    subjects = input("Enter students subject,separated by commas").split(",")
     if name in students:
-        print(f"Student {name} already exists.")
+        print(f"Student {name} already exists. Choose another name or update existing")
         return
     else:
         students[name] = {'age': age, 'grade': grade, 'subjects': subjects}
@@ -19,7 +15,6 @@ def add_student(name, age, grade, subjects):
 
 
 def update_student(name):
-    name = input("Enter students name to be updated")
     if name not in students:
         print(f"Student {name} doesn't exist")
         return
@@ -35,37 +30,53 @@ def update_student(name):
     if new_subjects:
         student['subjects'] = [subject.strip() for subject in new_subjects.split(',')]
 
+    students[name] = student
+    print(f"{name} has been updated")
     # Checks if the student exists
     # Prompts the user to update fields and keep current values if fields are empty
     # Updates the new values, if there are any
 
 
 def delete_student(name):
-    """
-    Delete a student record based on the student's name.
-    Args:
-    - name (str): The name of the student to delete.
-    """
-    # Check if the student exists
-    # Code to delete the student's record
+    if name not in students:
+        print(f"Student {name} doesn't exist")
+        return
+    del students[name]
+    print("Entry has been deleted")
+
+    # Checks if the student exists
+    # Deletes the student's record
 
 
 def search_student(name):
-    """
-    Search for a student by name and return their record.
-    Args:
-    - name (str): The name of the student to search for.
-    """
-    # Check if the student exists
-    # Code to return the student's record
+    if name not in students:
+        print(f"Student {name} doesn't exist")
+        return None
+    else:
+        student = students[name]
+        print(f"Name: {name}")
+        print(f"Age: {students['age']}")
+        print(f"Grade: {students['grade']}")
+        print("Subjects:", ', '.join(students['subjects']))
+        return student
+
+    # Checks if the student exists
+    # Returns the student's record
 
 
 def list_all_students():
-    """
-    List all student records.
-    """
-    # Check if there are any student records
-    # Code to list all students
+    if not students:
+        print("No student records available.")
+    else:
+        print("List of all students:")
+        for name, info in students.items():
+            print(f"Name: {name}")
+            print(f"Age: {info['age']}")
+            print(f"Grade: {info['grade']}")
+            print("Subjects:", ', '.join(info['subjects']))
+            print()
+    # Checks if there are any student records
+    # Lists all students
 
 
 def main():
