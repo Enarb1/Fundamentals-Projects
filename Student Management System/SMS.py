@@ -3,33 +3,41 @@ students = {}
 
 
 def add_student(name, age, grade, subjects):
-    """
-    Add a new student record.
-    Args:
-    - name (str): The name of the student.
-    - age (int): The age of the student.
-    - grade (float): The grade of the student.
-    - subjects (list of str): The subjects the student is enrolled in.
-    """
+    name = input("Enter students name")
+    age = int(input("Enter students age"))
+    grade = float(input("Enter students grade"))
+    subjects = input("Enter students subject,separated by commas").split(",")
     if name in students:
         print(f"Student {name} already exists.")
         return
     else:
         students[name] = {'age': age, 'grade': grade, 'subjects': subjects}
         print(f"Student {name} added successfully.")
-    # Checking , if the student exists . If  yes, we go back , \
-    # if not - we add the new student data , to the dictionary  which stores all the students
+
+# Checks if student exists
+# Adding the new student to the dictionary
 
 
 def update_student(name):
-    """
-    Update an existing student record.
-    Args:
-    - name (str): The name of the student whose record is to be updated.
-    """
-    # Check if the student exists
-    # Prompt the user to update fields and keep current values if fields are empty
-    # Code to update the student's record
+    name = input("Enter students name to be updated")
+    if name not in students:
+        print(f"Student {name} doesn't exist")
+        return
+    student = students[name]
+
+    new_age = input(f"Enter age for {name} (current age{student["age"]})")
+    if new_age:
+        student['age'] = int(new_age)
+    new_grade = input(f"Enter the new grade for {name} (current grade: {student['grade']})")
+    if new_grade:
+        student['grade'] = float(new_grade)
+    new_subjects = input(f"Enter the new subjects separated by commas for {name} (current subjects: {", ".join(student['subjects'])})")
+    if new_subjects:
+        student['subjects'] = [subject.strip() for subject in new_subjects.split(',')]
+
+    # Checks if the student exists
+    # Prompts the user to update fields and keep current values if fields are empty
+    # Updates the new values, if there are any
 
 
 def delete_student(name):
