@@ -1,1 +1,1 @@
-This are projects during  SoftUni Fundamentals Module
+That are projects during  SoftUni Fundamentals Module
