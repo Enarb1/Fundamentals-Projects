@@ -56,15 +56,6 @@ def handle_pop(lst):
     print(lst)
 
 
-
-
-    # TODO: Prompt the user for an index to pop (optional, leave empty to pop last item)
-    # Use the pop() method to remove the item at the specified index or the last item if no index is provided
-    # Handle the case where the index is out of range
-    # Print the updated list
-    pass
-
-
 def handle_clear(lst):
     # TODO: Use the clear() method to remove all items from the list
     # Print the updated list
