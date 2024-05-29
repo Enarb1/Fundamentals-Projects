@@ -35,11 +35,12 @@ def handle_insert(lst):
 
 
 def handle_remove(lst):
-    # TODO: Prompt the user for a value to remove from the list
-    # Use the remove() method to delete the first occurrence of the value
-    # Handle the case where the value is not found in the list
-    # Print the updated list
-    pass
+    value = input("Insert value to remove: ")
+    if value not in lst:
+        print("value does not exist!")
+    else:
+        lst.remove(value)
+        print(lst)
 
 
 def handle_pop(lst):
