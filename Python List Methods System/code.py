@@ -15,14 +15,12 @@ def display_menu():
 
 
 def handle_append(lst):
-
     value = input("Insert one value to add in the list: ")
     lst.append(value)
     print(lst)
 
 
 def handle_extend(lst):
-
     value = input("Insert values to extend the list (comma-separated): ")
     value_to_add = value.split(", ")
     lst.extend(value_to_add)
@@ -30,10 +28,10 @@ def handle_extend(lst):
 
 
 def handle_insert(lst):
-    # TODO: Prompt the user for an index and a value to insert at that index
-    # Use the insert() method to add the value at the specified index
-    # Print the updated list
-    pass
+    index = int(input("Insert index number: "))
+    value = input("Insert value for that index: ")
+    lst.insert(index, value)
+    print(lst)
 
 
 def handle_remove(lst):
