@@ -44,6 +44,20 @@ def handle_remove(lst):
 
 
 def handle_pop(lst):
+    value = input("Insert index to remove , or leave empty to remove last item: ")
+    if value == '':
+        lst.pop()
+    else:
+        value = int(value)
+        if value not in range(len(lst)):
+            print("Index does not exist!")
+        else:
+            lst.pop(value)
+    print(lst)
+
+
+
+
     # TODO: Prompt the user for an index to pop (optional, leave empty to pop last item)
     # Use the pop() method to remove the item at the specified index or the last item if no index is provided
     # Handle the case where the index is out of range
