@@ -76,7 +76,6 @@ def handle_pop(lst):
             print("Please enter a number for the index, or leave empty to remove last item!")
 
 
-
 def handle_clear(lst):
     lst.clear()
     print(f"List cleared. List : {lst}")
@@ -89,7 +88,7 @@ def handle_index(lst):
     else:
         index = lst.index(value)
         print(f"The index of {value} is: {index}")
-
+# TODO: Add exceptions like in the list.pop function
 
 def handle_count(lst):
     value = input("Type the value which you want to count: ")
