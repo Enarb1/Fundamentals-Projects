@@ -50,16 +50,31 @@ def handle_remove(lst):
 
 
 def handle_pop(lst):
-    value = input("Insert index to remove , or leave empty to remove last item: ")
-    if value == '':
-        lst.pop()
-    else:
-        value = int(value)
-        if value not in range(len(lst)):
-            print("Index does not exist!")
+    while True:
+        value = input("Insert index to remove , or leave empty to remove last item: ")
+        if value == '':
+            lst.pop()
+            print(lst)
+            break
+        elif value.isdigit():
+            value = int(value)
+            if value not in range(len(lst)):
+                print("Index does not exist!")
+                while True:
+                    answer = input("Try again? Y/N")
+                    if answer == "Y":
+                        break
+                    elif answer == "N":
+                        return display_menu()
+                    else:
+                        print("Invalid answer. Chose Y for YES and N for NO . ")
+            else:
+                lst.pop(value)
+                print(lst)
+                break
         else:
-            lst.pop(value)
-    print(lst)
+            print("Please enter a number for the index, or leave empty to remove last item!")
+
 
 
 def handle_clear(lst):
