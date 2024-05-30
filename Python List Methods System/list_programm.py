@@ -28,10 +28,16 @@ def handle_extend(lst):
 
 
 def handle_insert(lst):
-    index = int(input("Insert index number: "))
-    value = input("Insert value for that index: ")
-    lst.insert(index, value)
-    print(lst)
+    while True:
+        index = input("Insert index number: ")
+        if index.isdigit():
+            index = int(index)
+            value = input("Insert value for that index: ")
+            lst.insert(index, value)
+            print(lst)
+            break
+        else:
+            print("Please enter a number for index")
 
 
 def handle_remove(lst):
