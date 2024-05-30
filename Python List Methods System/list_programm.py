@@ -100,7 +100,7 @@ def handle_count(lst):
             print(f"{value} appears {count_value} time in the list.")
         else:
             print(f"{value} appears {count_value} times in the list.")
-
+# TODO: Add exceptions like in the list.pop function
 
 def handle_sort(lst):
     lst.sort()
