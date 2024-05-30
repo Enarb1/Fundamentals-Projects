@@ -21,8 +21,8 @@ def handle_append(lst):
 
 
 def handle_extend(lst):
-    value = input("Insert values to extend the list (comma-separated): ")
-    value_to_add = value.split(", ")
+    value = input("Insert values to extend the list (comma-separated): ").strip()
+    value_to_add = [item.strip() for item in value.split(",")]
     lst.extend(value_to_add)
     print(lst)
 
@@ -57,17 +57,17 @@ def handle_pop(lst):
 
 
 def handle_clear(lst):
-    # TODO: Use the clear() method to remove all items from the list
-    # Print the updated list
-    pass
+    lst.clear()
+    print(f"List cleared. List : {lst}")
 
 
 def handle_index(lst):
-    # TODO: Prompt the user for a value to find its index
-    # Use the index() method to find the index of the value
-    # Handle the case where the value is not found in the list
-    # Print the index of the value
-    pass
+    value = input("Insert value to find its index: ")
+    if value not in lst:
+        print("No such value in the list!")
+    else:
+        index = lst.index(value)
+        print(f"The index of {value} is: {index}")
 
 
 def handle_count(lst):
@@ -96,8 +96,8 @@ def handle_copy(lst):
 
 
 def main():
-    initial_values = input("Enter initial list values (comma-separated): ")
-    lst = initial_values.split(',')
+    initial_values = input("Enter initial list values (comma-separated): ").strip()
+    lst = [value.strip() for value in initial_values.split(',') if value.strip()]
 
     while True:
         display_menu()
