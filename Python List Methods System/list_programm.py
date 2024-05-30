@@ -83,9 +83,8 @@ def handle_count(lst):
 
 
 def handle_sort(lst):
-    # TODO: Use the sort() method to sort the list in ascending order
-    # Print the updated list
-    pass
+    lst.sort()
+    print(lst)
 
 
 def handle_reverse(lst):
