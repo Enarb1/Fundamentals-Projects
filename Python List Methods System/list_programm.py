@@ -82,25 +82,45 @@ def handle_clear(lst):
 
 
 def handle_index(lst):
-    value = input("Insert value to find its index: ")
-    if value not in lst:
-        print("No such value in the list!")
-    else:
-        index = lst.index(value)
-        print(f"The index of {value} is: {index}")
-# TODO: Add exceptions like in the list.pop function
+    while True:
+        value = input("Insert value to find its index: ")
+        if value not in lst:
+            print("No such value in the list!")
+            while True:
+                answer = input("Try again? Y/N")
+                if answer == "Y":
+                    break
+                elif answer == "N":
+                    return display_menu()
+                else:
+                    print("Invalid answer. Chose Y for YES and N for NO . ")
+        else:
+            index = lst.index(value)
+            print(f"The index of {value} is: {index}")
+            break
+
 
 def handle_count(lst):
-    value = input("Type the value which you want to count: ")
-    if value not in lst:
-        print(f"{value} does not exist in this list!")
-    else:
-        count_value = lst.count(value)
-        if count_value == 1:
-            print(f"{value} appears {count_value} time in the list.")
+    while True:
+        value = input("Type the value which you want to count: ")
+        if value not in lst:
+            print(f"{value} does not exist in this list!")
+            while True:
+                answer = input("Try again? Y/N")
+                if answer == "Y":
+                    break
+                elif answer == "N":
+                    return display_menu()
+                else:
+                    print("Invalid answer. Chose Y for YES and N for NO . ")
         else:
-            print(f"{value} appears {count_value} times in the list.")
-# TODO: Add exceptions like in the list.pop function
+            count_value = lst.count(value)
+            if count_value == 1:
+                print(f"{value} appears {count_value} time in the list.")
+            else:
+                print(f"{value} appears {count_value} times in the list.")
+        break
+
 
 def handle_sort(lst):
     lst.sort()
