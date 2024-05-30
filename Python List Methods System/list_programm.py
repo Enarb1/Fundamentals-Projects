@@ -88,15 +88,13 @@ def handle_sort(lst):
 
 
 def handle_reverse(lst):
-    # TODO: Use the reverse() method to reverse the order of the list
-    # Print the updated list
-    pass
+    lst.reverse()
+    print(lst)
 
 
 def handle_copy(lst):
-    # TODO: Use the copy() method to create a shallow copy of the list
-    # Print the copied list
-    pass
+    copied_list = lst.copy()
+    print(copied_list)
 
 
 def main():
