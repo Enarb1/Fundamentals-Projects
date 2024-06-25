@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "description": "Branko",
+    "priority": "low",
+    "deadline": "2024-11-17",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "description": "MiraMira",
+    "priority": "high",
+    "deadline": "2024-01-05",
+    "completed": false
+  },
+  {
+    "id": 3,
+    "description": "Bashta",
+    "priority": "medium",
+    "deadline": "2024-12-18",
+    "completed": false
+  }
+]
