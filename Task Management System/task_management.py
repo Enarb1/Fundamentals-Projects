@@ -299,6 +299,15 @@ def sort_tasks_by_priority(tasks):
 
 
 def priority_input_validation(priority):
+    """
+    Checks if the priority input is valid.
+
+    Parameters:
+    priority from input
+
+    Returns:
+    True or False
+    """
     if priority != 'low' and priority != 'medium' and priority != "high":
         return False
     else:
@@ -306,6 +315,15 @@ def priority_input_validation(priority):
 
 
 def date_validation(date):
+    """
+    Checks if the input date format for the deadline is valid.
+
+    Parameters:
+    date = deadline date from input
+
+    Returns:
+    True or False
+    """
     pattern = r'^\d{4}-\d{2}-\d{2}$'
 
     if re.match(pattern, date):
@@ -315,6 +333,16 @@ def date_validation(date):
 
 
 def check_id_exist(task_id, tasks):
+    """
+    Checks if the task ID exists
+
+    Parameters:
+    tasks.json (list of dict): The current list of tasks.json.
+    task_id from input
+
+    Returns:
+    True or False
+    """
     return bool([num for num in tasks if num['id'] == task_id])
 
 
