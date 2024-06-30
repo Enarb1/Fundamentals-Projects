@@ -297,24 +297,25 @@ def sort_tasks_by_priority(tasks):
     return tasks
 
 
-def priority_input_validation(task):
-    if task['priority'] != 'low' and task['priority'] != 'medium' and task['priority'] != "high":
+def priority_input_validation(priority):
+    if priority != 'low' and priority != 'medium' and priority != "high":
         return False
     else:
         return True
 
 
-def date_validation(task):
+def date_validation(date):
     pattern = r'^\d{4}-\d{2}-\d{2}$'
 
-    if re.match(pattern,task['deadline']):
+    if re.match(pattern, date):
         return True
     else:
         return False
 
 
-def check_id_exist(task, tasks):
-    return bool([num for num in tasks if num['id'] == task['id']])
+def check_id_exist(task_id, tasks):
+    return bool([num for num in tasks if num['id'] == task_id])
+
 
 def print_menu():
     """
@@ -360,9 +361,12 @@ def main():
                 'deadline': input("Enter task deadline (YYYY-MM-DD): ").strip(),
                 'completed': False
             }
-            if not check_id_exist(task, tasks):
-                if priority_input_validation(task):
-                    if date_validation(task):
+            task_id = task['id']
+            priority = task['priority']
+            date_input = task['deadline']
+            if not check_id_exist(task_id, tasks):
+                if priority_input_validation(priority):
+                    if date_validation(date_input):
                         tasks = add_task(tasks, task)
                         print("Task added successfully.")
                     else:
@@ -373,21 +377,38 @@ def main():
                 print("ID already exists!")
         elif choice == '2':
             task_id = int(input("Enter task ID to remove: "))
-            tasks = remove_task(tasks, task_id)
-            print("Task removed successfully.")
+            if check_id_exist(task_id, tasks):
+                tasks = remove_task(tasks, task_id)
+                print("Task removed successfully.")
+            else:
+                print("Task ID doesn't exist")
         elif choice == '3':
             task_id = int(input("Enter task ID to update: "))
-            updated_task = {
-                'description': input("Enter new task description: "),
-                'priority': input("Enter new task priority (low, medium, high): "),
-                'deadline': input("Enter new task deadline (YYYY-MM-DD): ")
-            }
-            tasks = update_task(tasks, task_id, updated_task)
-            print("Task updated successfully.")
+            if check_id_exist(task_id, tasks):
+                updated_task = {
+                    'description': input("Enter new task description: "),
+                    'priority': input("Enter new task priority (low, medium, high): "),
+                    'deadline': input("Enter new task deadline (YYYY-MM-DD): ")
+                }
+                updated_task['priority'] = priority
+                updated_task['deadline'] = date_input
+                if priority_input_validation(priority):
+                    if date_validation(date_input):
+                        tasks = update_task(tasks, task_id, updated_task)
+                        print("Task updated successfully.")
+                    else:
+                        print("Invalid date format! Enter deadline in YYYY-MM-DD format!")
+                else:
+                    print("Invalid input! Priority should be low, medium or high")
+            else:
+                print("Task ID doesn't exist")
         elif choice == '4':
             task_id = int(input("Enter task ID to get: "))
-            task = get_task(tasks, task_id)
-            print("Task details:", task)
+            if check_id_exist(task_id, tasks):
+                task = get_task(tasks, task_id)
+                print("Task details:", task)
+            else:
+                print("Task ID doesn't exist")
         elif choice == '5':
             task_id = int(input("Enter task ID to set priority: "))
             priority = input("Enter new priority (low, medium, high): ")
