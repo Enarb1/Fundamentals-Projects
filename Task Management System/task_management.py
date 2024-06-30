@@ -150,6 +150,7 @@ def search_tasks_by_keyword(tasks, keyword):
     """
     return [task for task in tasks if keyword in task['description']]
 
+
 def filter_tasks_by_priority(tasks, priority):
     """
     Filters tasks.json by priority.
@@ -412,22 +413,40 @@ def main():
         elif choice == '5':
             task_id = int(input("Enter task ID to set priority: "))
             priority = input("Enter new priority (low, medium, high): ")
-            tasks = set_task_priority(tasks, task_id, priority)
-            print("Task priority set successfully.")
+            if check_id_exist(task_id, tasks):
+                if priority_input_validation(priority):
+                    tasks = set_task_priority(tasks, task_id, priority)
+                    print("Task priority set successfully.")
+                else:
+                    print("Invalid input! Priority should be low, medium or high")
+            else:
+                print("Task ID doesn't exist")
         elif choice == '6':
             task_id = int(input("Enter task ID to set deadline: "))
             deadline = input("Enter new deadline (YYYY-MM-DD): ")
-            tasks = set_task_deadline(tasks, task_id, deadline)
-            print("Task deadline set successfully.")
+            if check_id_exist(task_id, tasks):
+                if date_validation(deadline):
+                    tasks = set_task_deadline(tasks, task_id, deadline)
+                    print("Task deadline set successfully.")
+                else:
+                    print("Invalid date format! Enter deadline in YYYY-MM-DD format!")
+            else:
+                print("Task ID doesn't exist")
         elif choice == '7':
             task_id = int(input("Enter task ID to mark as completed: "))
-            tasks = mark_task_as_completed(tasks, task_id)
-            print("Task marked as completed.")
+            if check_id_exist(task_id, tasks):
+                tasks = mark_task_as_completed(tasks, task_id)
+                print("Task marked as completed.")
+            else:
+                print("Task ID doesn't exist")
         elif choice == '8':
             task_id = int(input("Enter task ID to set description: "))
             description = input("Enter new description: ")
-            tasks = set_task_description(tasks, task_id, description)
-            print("Task description set successfully.")
+            if check_id_exist(task_id, tasks):
+                tasks = set_task_description(tasks, task_id, description)
+                print("Task description set successfully.")
+            else:
+                print("Task ID doesn't exist")
         elif choice == '9':
             keyword = input("Enter keyword to search: ")
             found_tasks = search_tasks_by_keyword(tasks, keyword)
