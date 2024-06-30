@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+import re
 
 
 def add_task(tasks, task):
@@ -295,6 +296,26 @@ def sort_tasks_by_priority(tasks):
     tasks = sorted(tasks, key=lambda task: priority_order[task['priority']])
     return tasks
 
+
+def priority_input_validation(task):
+    if task['priority'] != 'low' and task['priority'] != 'medium' and task['priority'] != "high":
+        return False
+    else:
+        return True
+
+
+def date_validation(task):
+    pattern = r'^\d{4}-\d{2}-\d{2}$'
+
+    if re.match(pattern,task['deadline']):
+        return True
+    else:
+        return False
+
+
+def check_id_exist(task, tasks):
+    return bool([num for num in tasks if num['id'] == task['id']])
+
 def print_menu():
     """
     Prints the user menu.
@@ -335,12 +356,21 @@ def main():
             task = {
                 'id': int(input("Enter task ID: ")),
                 'description': input("Enter task description: "),
-                'priority': input("Enter task priority (low, medium, high): "),
-                'deadline': input("Enter task deadline (YYYY-MM-DD): "),
+                'priority': input("Enter task priority (low, medium, high): ").strip().lower(),
+                'deadline': input("Enter task deadline (YYYY-MM-DD): ").strip(),
                 'completed': False
             }
-            tasks = add_task(tasks, task)
-            print("Task added successfully.")
+            if not check_id_exist(task, tasks):
+                if priority_input_validation(task):
+                    if date_validation(task):
+                        tasks = add_task(tasks, task)
+                        print("Task added successfully.")
+                    else:
+                        print("Invalid date format! Enter deadline in YYYY-MM-DD format!")
+                else:
+                    print("Invalid input! Priority should be low, medium or high")
+            else:
+                print("ID already exists!")
         elif choice == '2':
             task_id = int(input("Enter task ID to remove: "))
             tasks = remove_task(tasks, task_id)
