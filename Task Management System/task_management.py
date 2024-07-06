@@ -87,6 +87,7 @@ def set_task_priority(tasks, task_id, priority):
             task['priority'] = priority
         return tasks
 
+
 def set_task_deadline(tasks, task_id, deadline):
     """
     Sets the deadline for a task.
@@ -104,6 +105,7 @@ def set_task_deadline(tasks, task_id, deadline):
             task['deadline'] = deadline
         return tasks
 
+
 def mark_task_as_completed(tasks, task_id):
     """
     Marks a task as completed.
@@ -119,6 +121,7 @@ def mark_task_as_completed(tasks, task_id):
         if task['id'] == task_id:
             task['completed'] = True
         return tasks
+
 
 def set_task_description(tasks, task_id, description):
     """
@@ -136,6 +139,7 @@ def set_task_description(tasks, task_id, description):
         if task['id'] == task_id:
             task['description'] = description
         return tasks
+
 
 def search_tasks_by_keyword(tasks, keyword):
     """
@@ -164,6 +168,7 @@ def filter_tasks_by_priority(tasks, priority):
     """
     return [task for task in tasks if task['priority'] == priority]
 
+
 def filter_tasks_by_status(tasks, status):
     """
     Filters tasks.json by their completion status.
@@ -175,6 +180,13 @@ def filter_tasks_by_status(tasks, status):
     Returns:
     list of dict: Tasks with the specified completion status.
     """
+
+    if status == 'completed':
+        return [task for task in tasks if task.get('completed') == True]
+    elif status == 'pending':
+        return [task for task in tasks if task.get('completed') == False]
+    else:
+        return None
 
 
 def filter_tasks_by_deadline(tasks, deadline):
@@ -190,6 +202,7 @@ def filter_tasks_by_deadline(tasks, deadline):
     """
     return [task for task in tasks if task['deadline'] == deadline]
 
+
 def count_tasks(tasks):
     """
     Returns the total number of tasks.json.
@@ -202,6 +215,7 @@ def count_tasks(tasks):
     """
     return len(tasks)
 
+
 def count_completed_tasks(tasks):
     """
     Returns the number of completed tasks.json.
@@ -213,6 +227,7 @@ def count_completed_tasks(tasks):
     int: The number of completed tasks.json.
     """
     return len([task for task in tasks if task['completed'] == True])
+
 
 def count_pending_tasks(tasks):
     """
@@ -242,6 +257,7 @@ def generate_task_summary(tasks):
                f"Pending tasks.json - {len([task for task in tasks if task['completed'] == False])} ")
     return summary
 
+
 def save_tasks_to_file(tasks, file_path):
     """
     Saves the task list to a file.
@@ -256,6 +272,7 @@ def save_tasks_to_file(tasks, file_path):
     with open(file_path, 'w') as f:
         json.dump(tasks, f, indent=2)
 
+
 def load_tasks_from_file(file_path):
     """
     Loads the task list from a file.
@@ -268,6 +285,7 @@ def load_tasks_from_file(file_path):
     """
     with open(file_path, 'r') as f:
         return json.load(f)
+
 
 def sort_tasks_by_deadline(tasks):
     """
@@ -282,6 +300,7 @@ def sort_tasks_by_deadline(tasks):
     tasks = sorted(tasks, key=lambda task: datetime.strptime(task['deadline'], "%Y-%m-%d"))
 
     return tasks
+
 
 def sort_tasks_by_priority(tasks):
     """
@@ -484,7 +503,7 @@ def main():
             filtered_tasks = filter_tasks_by_priority(tasks, priority)
             print("Filtered tasks.json:", filtered_tasks)
         elif choice == '11':
-            status = input("Enter status to filter by (completed/pending): ").lower() == 'completed'
+            status = input("Enter status to filter by (completed/pending): ").lower().strip()
             filtered_tasks = filter_tasks_by_status(tasks, status)
             print("Filtered tasks.json:", filtered_tasks)
         elif choice == '12':
